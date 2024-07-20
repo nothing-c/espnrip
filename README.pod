@@ -1,0 +1,17 @@
+=pod
+
+Oneliner ver:
+perl -MHTTP::Tiny -e '$h=HTTP::Tiny->new(); $r=$h->get(q(https://www.espn.com/espn/rss/nfl/news)); die q(No pull!) unless $r->{success}; @x = split /<item>/,$r->{content}; for (grep !/rss/,@x) { @y=split /></,$_; $y[1]=~s/^.+\[(.+)\]{2}/$1/; $y[4]=~s/^.*\[(.+)\]{2}/$1/;$l=(grep /https:/,@y)[1]; $l=~s/^.*\[(.+)\]{2}/$1/;printf qq(Title: %s\nDescription: %s\nLink: %s\n),$y[1],$y[4],$l;}'
+
+espn rss feed
+- nabber (perl) to create ticker
+  - https://www.espn.com/espn/news/story?page=rssinfo
+  - split on >< (odds of that being in the actual title are miniscule) and grep for title
+
+- llm summarizer (quick and simple, just dump the article in) [need to work out the prompt I want to use, but otherwise good]
+  - could use claude https://docs.anthropic.com/en/api/rate-limits (decent free tier)
+- I could also run a quick server to dump the links into a page, drudge-esque (cgi addition when I get that rolling, perhaps), or not do a server and just autogen the page
+
+
+
+=cut
