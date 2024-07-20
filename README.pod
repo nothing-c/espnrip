@@ -2,6 +2,8 @@
 
 ESPN RSS feed
 
+=for html <img src="mascot.jpg" alt="ESPN ripper mascot">
+
 This could easily become a CGI page :)
 
 Oneliner ver:
