@@ -10,7 +10,9 @@ perl -MHTTP::Tiny -e '$h=HTTP::Tiny->new(); $r=$h->get(q(https://www.espn.com/es
 =head2 Done
 
 - nabber (perl) to create ticker
+
   - https://www.espn.com/espn/news/story?page=rssinfo
+
   - split on >< (odds of that being in the actual title are miniscule) and grep for title
 
 - I could also run a quick server to dump the links into a page, drudge-esque (cgi addition when I get that rolling, perhaps), or not do a server and just autogen the page
@@ -18,5 +20,6 @@ perl -MHTTP::Tiny -e '$h=HTTP::Tiny->new(); $r=$h->get(q(https://www.espn.com/es
 =head2 TODO
 
 - llm summarizer (quick and simple, just dump the article in) [need to work out the prompt I want to use, but otherwise good]
+
   - could use claude https://docs.anthropic.com/en/api/rate-limits (decent free tier)
 =cut
