@@ -1,4 +1,4 @@
-use HTTP::Tiny;
+use v5.10; use HTTP::Tiny;
 
 sub rip() {
     my @r;
@@ -7,4 +7,13 @@ sub rip() {
     return @r;
 }
 
-map { printf "Title: %s\nDescription: %s\nLink: %s\n",$_->[0],$_->[1],$_->[2] } rip;
+sub serve(@j) {
+    say "<!DOCTYPE html><head></head><body>";
+    for (@_) { printf "<article><h1><a href=\"%s\">%s</a></h1><p>%s</p></article>\n",$_->[2],$_->[0],$_->[1],; }
+    say "</body></html>";
+
+}
+
+#map { printf "Title: %s\nDescription: %s\nLink: %s\n",$_->[0],$_->[1],$_->[2] } rip;
+
+serve rip;

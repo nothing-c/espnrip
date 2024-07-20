@@ -4,7 +4,7 @@ Oneliner ver:
 perl -MHTTP::Tiny -e '$h=HTTP::Tiny->new(); $r=$h->get(q(https://www.espn.com/espn/rss/nfl/news)); die q(No pull!) unless $r->{success}; @x = split /<item>/,$r->{content}; for (grep !/rss/,@x) { @y=split /></,$_; $y[1]=~s/^.+\[(.+)\]{2}/$1/; $y[4]=~s/^.*\[(.+)\]{2}/$1/;$l=(grep /https:/,@y)[1]; $l=~s/^.*\[(.+)\]{2}/$1/;printf qq(Title: %s\nDescription: %s\nLink: %s\n),$y[1],$y[4],$l;}'
 
 espn rss feed
-- nabber (perl) to create ticker
+- nabber (perl) to create ticker (done)
   - https://www.espn.com/espn/news/story?page=rssinfo
   - split on >< (odds of that being in the actual title are miniscule) and grep for title
 
