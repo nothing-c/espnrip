@@ -1,4 +1,4 @@
-use v5.10; use HTTP::Tiny; use Data::Dumper;
+use v5.10; use HTTP::Tiny;
 
 sub rip() {
     my @r;
@@ -7,12 +7,10 @@ sub rip() {
     return @r;
 }
 
-sub serve(@j) {
-    say "<!DOCTYPE html><head></head><body>";
-    say "Generated " . localtime;
-    for (@_) { printf "<article><h1><a href=\"%s\">%s</a></h1><p>%s</p></article>\n",$_->[2],$_->[0],$_->[1],; }
-    say "</body></html>";
-
+sub serve(@) {
+    $r="<!DOCTYPE html><head></head><body>";$r .= "Generated " . localtime;
+    for (@_) { $r.=sprintf "<article><h1><a href=\"%s\">%s</a></h1><p>%s</p></article>\n",$_->[2],$_->[0],$_->[1],; }
+    $r.="</body></html>"; return $r;
 }
 
-serve rip;
+open my $F,'>',"./espn-rip.html" or die "Could not open outfile"; print $F serve rip; close $F;
