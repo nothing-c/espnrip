@@ -25,7 +25,8 @@ sub serve(@) {
 }
 
 open my $F,'>',"./espn-rip.html" or die "Could not open outfile";
-print $F "<!DOCTYPE html><head></head><body>Generated " . localtime;
-for (sort keys %f) { print $F "<h1>".uc $_."</h1>"; print $F serve rip $f{$_} };
+print $F "<!DOCTYPE html><head></head><body>Generated " . localtime . "<br>";
+for (sort keys %f) { print $F "<a href=\"#$_\">".uc $_."</a><br>"; }
+for (sort keys %f) { print $F "<h1 id=\"$_\">".uc $_."</h1>"; print $F serve rip $f{$_} };
 print $F "</body></html>";
 close $F;
