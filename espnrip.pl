@@ -41,5 +41,9 @@ sub cgi() {
     say "</body></html>";
 }
 
-cgi;
-#file $N;
+sub cli($) {
+    my $x=shift;
+    die "Does not exist!" unless exists $f{$x};
+    map {printf "Title: %s\nDescription: %s\nLink: %s\n",$_->[0],$_->[1],$_->[2]} rip $f{$x};
+}
+
