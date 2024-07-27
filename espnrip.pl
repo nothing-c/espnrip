@@ -1,4 +1,6 @@
-use v5.10; use HTTP::Tiny;
+use v5.10; use HTTP::Tiny; use Getopt::Std;
+
+our $N="./espn-rip.html";
 
 # from https://www.espn.com/espn/news/story?page=rssinfo
 our %f = (
@@ -24,9 +26,20 @@ sub serve(@) {
     return $r;
 }
 
-open my $F,'>',"./espn-rip.html" or die "Could not open outfile";
-print $F "<!DOCTYPE html><head></head><body>Generated " . localtime . "<br>";
-for (sort keys %f) { print $F "<a href=\"#$_\">".uc $_."</a><br>"; }
-for (sort keys %f) { print $F "<h1 id=\"$_\">".uc $_."</h1>"; print $F serve rip $f{$_} };
-print $F "</body></html>";
-close $F;
+sub file($) {
+    open my $F,'>', shift or die "Could not open outfile";
+    print $F "<!DOCTYPE html><head></head><body>Generated " . localtime . "<br>";
+    for (sort keys %f) { print $F "<a href=\"#$_\">".uc $_."</a><br>"; }
+    for (sort keys %f) { print $F "<h1 id=\"$_\">".uc $_."</h1>"; print $F serve rip $f{$_} };
+    print $F "</body></html>"; close $F;
+}
+
+sub cgi() {
+    say "<!DOCTYPE html><head></head><body>Generated " . localtime . "<br>";
+    for (sort keys %f) { say "<a href=\"#$_\">".uc $_."</a><br>"; }
+    for (sort keys %f) { say "<h1 id=\"$_\">".uc $_."</h1>"; say serve rip $f{$_} };
+    say "</body></html>";
+}
+
+cgi;
+#file $N;

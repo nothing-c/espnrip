@@ -13,13 +13,18 @@ perl -MHTTP::Tiny -e '$h=HTTP::Tiny->new(); $r=$h->get(q(https://www.espn.com/es
 
 - nabber (perl) to create ticker
 
-E<nbsp>E<nbsp>- https://www.espn.com/espn/news/story?page=rssinfo>
+E<nbsp>E<nbsp>- https://www.espn.com/espn/news/story?page=rssinfo
 
 E<nbsp>E<nbsp>- split on >< (odds of that being in the actual title are miniscule) and grep for title
 
 - I could also run a quick server to dump the links into a page, drudge-esque (cgi addition when I get that rolling, perhaps), or not do a server and just autogen the page
 
 =head2 TODO
+
+- switches for:
+  - CGI
+  - cli dumpage
+  - filename picking for output file
 
 - llm summarizer (quick and simple, just dump the article in) [need to work out the prompt I want to use, but otherwise good]
 
