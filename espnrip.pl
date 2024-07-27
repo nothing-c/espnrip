@@ -1,6 +1,6 @@
 use v5.10; use HTTP::Tiny; use Getopt::Std;
 
-our $N="./espn-rip.html";
+our $N="./espn-rip.html"; # default output file
 
 # from https://www.espn.com/espn/news/story?page=rssinfo
 our %f = (
@@ -43,7 +43,26 @@ sub cgi() {
 
 sub cli($) {
     my $x=shift;
-    die "Does not exist!" unless exists $f{$x};
+    if (!(exists $f{$x})) { say "Sport $x does not exist!"; help; exit -1 };
     map {printf "Title: %s\nDescription: %s\nLink: %s\n",$_->[0],$_->[1],$_->[2]} rip $f{$x};
 }
 
+sub help() {
+    say "espnrip: ESPN RSS feed";
+    say "Format: espnrip [-fch] [-F file] [-s sport]";
+    say "No arguments: output all sports in human-readable format to STDOUT";
+    say "-f: output HTML to default file ($N)";
+    say "-c: output as a CGI program";
+    say "-F file: output HTML to file";
+    say "-s sport: output only entries relating to sport";
+    say "-h: display this message";
+    say "Sports: NFL, NBA, MLB, NHL, CBB, CFB";
+}
+
+getopts 'fcF:s:h';
+if ($opt_f) { file $N; }
+elsif ($opt_F) { file $opt_F; }
+elsif ($opt_c) { cgi; }
+elsif ($opt_s) { cli lc $opt_s; }
+elsif ($opt_h) { help; }
+else { for (keys %f) { cli $_; } }

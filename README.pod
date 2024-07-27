@@ -19,12 +19,15 @@ E<nbsp>E<nbsp>- split on >< (odds of that being in the actual title are miniscul
 
 - I could also run a quick server to dump the links into a page, drudge-esque (cgi addition when I get that rolling, perhaps), or not do a server and just autogen the page
 
-=head2 TODO
-
 - switches for:
-  - CGI
-  - cli dumpage
-  - filename picking for output file
+
+E<nbsp>E<nbsp>- CGI
+
+E<nbsp>E<nbsp>- cli dumpage
+
+E<nbsp>E<nbsp>- filename picking for output file
+
+=head2 TODO
 
 - llm summarizer (quick and simple, just dump the article in) [need to work out the prompt I want to use, but otherwise good]
 
